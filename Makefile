@@ -3,6 +3,9 @@ SHELL = /bin/bash
 NAMESPACE := default
 POD := amazonlinux
 
+deploy:
+	kubectl apply -f amazonlinux.yaml
+
 bash:
 	kubectl exec -it --namespace $(NAMESPACE) $(POD) -- bash
 
