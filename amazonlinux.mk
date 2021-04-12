@@ -3,17 +3,18 @@ SHELL = /bin/bash
 install-packages:
 	# tar and make needs to be installed before anything else.
 	yum install --assumeyes \
-		gzip            \
-		make            \
-		python3         \
-		python3-devel   \
-		shadow-utils    \
-		sudo            \
-		tar             \
-		util-linux      \
-		vim             \
-		which           \
-		zstd            \
+		cyrus-sasl-devel      \
+		gzip                  \
+		make                  \
+		python3               \
+		python3-devel         \
+		shadow-utils          \
+		sudo                  \
+		tar                   \
+		util-linux            \
+		vim                   \
+		which                 \
+		zstd                  \
 	# END
 
 create-hadoop-user:
