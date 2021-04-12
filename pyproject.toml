@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "emr-more-packages"
+version = "2021.04.11"
+description = "Install more packages to EMR"
+authors = ["Dyno Fu <dyno.fu@gmail.com>"]
+
+[tool.poetry.dependencies]
+absl-py = "*"
+aiohttp = "*"
+aioitertools = "*"
+aiomultiprocess = "*"
+attrs = "*"
+cattrs = "*"
+python-dateutil = "*"
+more-itertools = "*"
+numpy = "*"
+pandas = "*"
+pyarrow = "*"
+pyhive = "*"
+python = "~3.7"
+pyyaml = "*"
+requests = "*"
+s3fs = "*"
+sh = "*"
+tabulate = "*"
+tqdm = "*"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+flake8 = "*"
+isort = "*"
+pytest = "*"
+
+[tool.black]
+line-length = 120
+target-version = ['py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.cache
+  | \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.ropeproject
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
