@@ -24,7 +24,7 @@ s3fs = "*"
 sasl = "*"
 sh = "*"
 tabulate = "*"
-thrift = "*"
+thrift = ">=0.13.0"
 thrift_sasl = "*"
 tqdm = "*"
 

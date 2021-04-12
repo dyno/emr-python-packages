@@ -4,6 +4,8 @@ install-packages:
 	# tar and make needs to be installed before anything else.
 	yum install --assumeyes \
 		cyrus-sasl-devel      \
+		gcc                   \
+		gcc-c++               \
 		gzip                  \
 		make                  \
 		python3               \
