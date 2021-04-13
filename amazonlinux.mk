@@ -29,7 +29,7 @@ install-virtualenv: install-packages
 	pip3 install --upgrade pip
 	/usr/local/bin/pip3 install --user poetry
 	[[ ! -f /tmp/requirements.txt ]] && ~/.local/bin/poetry install --no-root || ~/.local/bin/poetry update
-	~/.local/bin/poetry export -f requirements.txt --output requirements.txt
+	~/.local/bin/poetry export --dev -f requirements.txt --output requirements.txt
 
 # as hadoop
 install-python-packages:
