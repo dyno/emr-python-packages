@@ -2,6 +2,9 @@ silent! call plug#begin('~/.vim/plugged')
 
 Plug 'sbdchd/neoformat'
 
+" https://devhints.io/tabular
+Plug 'godlygeek/tabular.git'
+
 call plug#end()
 
 " :Neoformat

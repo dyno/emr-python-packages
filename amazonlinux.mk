@@ -7,7 +7,7 @@ install-packages:
 		cyrus-sasl-devel      \
 		gcc                   \
 		gcc-c++               \
-		git                   \
+		git-core              \
 		go                    \
 		gzip                  \
 		make                  \
@@ -52,5 +52,12 @@ install-shfmt:
 	GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 	cp ~/go/bin/shfmt ~/.local/bin
 
-tar-dev-packages: install-python-packages install-vim-plug install-shfmt
+install-git-remote-s3:
+	# https://github.com/bgahagan/git-remote-s3/
+	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v0.1.2/git-remote-s3-x86_64-unknown-linux-gnu.gz
+	gunzip git-remote-s3-x86_64-unknown-linux-gnu.gz
+	mv git-remote-s3-x86_64-unknown-linux-gnu ~/.local/bin/git-remote-s3
+	chmod +x ~/.local/bin/git-remote-s3
+
+tar-dev-packages: install-python-packages install-vim-plug install-shfmt install-git-remote-s3
 	tar zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc
