@@ -60,4 +60,4 @@ install-git-remote-s3:
 	chmod +x ~/.local/bin/git-remote-s3
 
 tar-dev-packages: install-python-packages install-vim-plug install-shfmt install-git-remote-s3
-	tar zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc
+	tar zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
