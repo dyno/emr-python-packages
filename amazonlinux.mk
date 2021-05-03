@@ -46,6 +46,7 @@ install-vim-plug:
 	# END
 	cp /tmp/vimrc ~/.vimrc
 	vim -c ":PlugInstall" -c "qa"
+	cp -r /tmp/.bash_completion.d ~/.bash_completion.d
 
 install-shfmt:
 	cp /tmp/bashrc ~/.bashrc
