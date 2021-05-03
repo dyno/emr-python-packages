@@ -20,6 +20,11 @@ let g:neoformat_python_black = {
 		\ 'stdin': 1,
 		\ 'args': ['--line-length', '120', '--quiet', '-'],
 		\ }
+let g:neoformat_python_isort = {
+		\ 'exe': 'isort',
+		\ 'args': ['-', '--quiet', '--project', 'salesforce'],
+		\ 'stdin': 1,
+		\ }
 let g:neoformat_enabled_python = ['black', 'isort']
 
 let g:neoformat_enabled_sh = ['shfmt']
