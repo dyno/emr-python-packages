@@ -7,6 +7,7 @@ Plug 'godlygeek/tabular'
 
 Plug 'cespare/vim-toml'
 
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'
