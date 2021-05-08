@@ -60,5 +60,29 @@ install-git-remote-s3:
 	mv git-remote-s3-x86_64-unknown-linux-gnu ~/.local/bin/git-remote-s3
 	chmod +x ~/.local/bin/git-remote-s3
 
-tar-dev-packages: install-python-packages install-vim-plug install-shfmt install-git-remote-s3
+install-rg:
+	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
+	tar xvf ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz ripgrep-12.1.1-x86_64-unknown-linux-musl/rg
+	tar xvf ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz ripgrep-12.1.1-x86_64-unknown-linux-musl/complete/rg.bash
+	cp ripgrep-12.1.1-x86_64-unknown-linux-musl/rg ~/.local/bin/
+	chmod +x ~/.local/bin/rg
+	cp ripgrep-12.1.1-x86_64-unknown-linux-musl/complete/rg.bash ~/.bash_completion.d/
+
+install-fzf:
+	curl -LO https://github.com/junegunn/fzf/releases/download/0.27.0/fzf-0.27.0-linux_amd64.tar.gz
+	curl -L -o ~/.bash_completion.d/fzf.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash
+	curl -L -o ~/.bash_completion.d/fzf-key-bindings.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash
+	tar xvf fzf-0.27.0-linux_amd64.tar.gz
+	mv fzf ~/.local/bin/fzf
+	chmod +x ~/.local/bin/fzf
+
+install-fd:
+	curl -LO https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
+	tar xvf fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz fd-v8.2.1-x86_64-unknown-linux-musl/autocomplete/fd.bash-completion
+	tar xvf fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz fd-v8.2.1-x86_64-unknown-linux-musl/fd
+	cp fd-v8.2.1-x86_64-unknown-linux-musl/fd ~/.local/bin
+	chmod +x ~/.local/bin/fd
+	cp fd-v8.2.1-x86_64-unknown-linux-musl/autocomplete/fd.bash-completion ~/.bash_completion.d/fd.bash
+
+tar-dev-packages: install-python-packages install-vim-plug install-shfmt install-git-remote-s3 install-rg install-fzf install-fd
 	tar zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d

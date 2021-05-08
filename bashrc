@@ -20,6 +20,27 @@ if [[ -f /etc/profile.d/bash_completion.sh ]]; then
   fi
 fi
 
+# ------------------------------------------------------------------------------
+
+# increase history size
+export HISTSIZE=9999
+export HISTFILESIZE=9999
+
+# https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export HISTTIMEFORMAT="%Y-%m-%d %T "
+
+# https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+shopt -s checkwinsize
+# make sure all terminals save history - append to history, don't overwrite it
+shopt -s histappend
+# https://askubuntu.com/questions/70750/how-to-get-bash-to-stop-escaping-during-tab-completion
+shopt -s direxpand
+
+# ------------------------------------------------------------------------------
+
 # User specific aliases and functions
 export PATH=$PATH:~/.local/bin
+export PYTHONPATH=~/py
 
