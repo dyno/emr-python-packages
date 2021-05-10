@@ -42,5 +42,5 @@ shopt -s direxpand
 
 # User specific aliases and functions
 export PATH=$PATH:~/.local/bin
-export PYTHONPATH=~/py
+export PYTHONPATH=~/scripts/py
 
