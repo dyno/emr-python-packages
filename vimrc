@@ -38,3 +38,5 @@ let g:neoformat_enabled_sh = ['shfmt']
 
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_verbose = 0
+
+set textwidth=128
