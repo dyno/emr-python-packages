@@ -8,5 +8,5 @@
 
 - `make deploy` to start the docker image
 - edit `pyproject.yaml` and add the package
-- `make exec-make` to create the `python3-user-packages.tar.gz`
-- On EMR as user hadoop, `tar zxvf python3-user-packages.tar.gz`
+- `make exec-make` to create the `dev-packages.tar.gz`
+- On EMR as user hadoop, `tar zxvf dev-packages.tar.gz`
