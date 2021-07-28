@@ -40,3 +40,14 @@ let g:neoformat_run_all_formatters = 1
 let g:neoformat_verbose = 0
 
 set textwidth=128
+
+augroup auto_filetype
+  autocmd!
+  autocmd BufRead,BufNewFile gitconfig  set filetype=gitconfig
+  autocmd BufRead,BufNewFile *.gradle   set filetype=groovy
+  autocmd BufRead,BufNewFile *.sc       set filetype=scala
+  autocmd BufRead,BufNewFile *Pipfile*  set filetype=toml
+  autocmd BufRead,BufNewFile *.py       set foldmethod=indent foldlevel=1 expandtab
+  autocmd BufRead,BufNewFile *.vim      set foldmethod=indent foldlevel=1 expandtab
+  autocmd BufRead,BufNewFile Makefile*,*.mk  setlocal listchars=tab:→\ ,trail:·,extends:↷,precedes:↶ filetype=make tabstop=8 noexpandtab list
+augroup end

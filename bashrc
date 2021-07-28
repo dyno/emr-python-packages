@@ -44,5 +44,6 @@ shopt -s direxpand
 export PATH=$PATH:~/.local/bin
 export PYTHONPATH=~/scripts/py
 
-AWS_REGION=$(curl --silent http://169.254.169.254/latest/meta-data/placement/region)
-export AWS_REGION
+# https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
+AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/latest/meta-data/placement/region)
+export AWS_DEFAULT_REGION
