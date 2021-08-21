@@ -39,7 +39,10 @@ let g:neoformat_enabled_sh = ['shfmt']
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_verbose = 0
 
-set textwidth=128
+# https://stackoverflow.com/questions/1290285/why-cant-i-stop-vim-from-wrapping-my-code/23032068
+# set textwidth=128
+set textwidth=0
+set wrapmargin=0
 
 augroup auto_filetype
   autocmd!
