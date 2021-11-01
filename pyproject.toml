@@ -5,12 +5,10 @@ description = "Install more packages to EMR"
 authors = ["Dyno Fu <dyno.fu@gmail.com>"]
 
 [tool.poetry.dependencies]
-boto3 = "1.19.7"
-pandas = "*"
+boto3 = "*"
 python = "~3.7"
 
 [tool.poetry.dev-dependencies]
-sqlparse = "*"
 
 [tool.black]
 line-length = 120
