@@ -84,5 +84,5 @@ install-fd:
 	chmod +x ~/.local/bin/fd
 	cp fd-v8.2.1-x86_64-unknown-linux-musl/autocomplete/fd.bash-completion ~/.bash_completion.d/fd.bash
 
-tar-dev-packages: install-python-packages install-vim-plug install-shfmt install-git-remote-s3 install-rg install-fzf install-fd
+tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3 install-rg install-fzf install-fd
 	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
