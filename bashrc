@@ -42,7 +42,7 @@ shopt -s direxpand
 
 # User specific aliases and functions
 export PATH=$PATH:~/.local/bin
-export PYTHONPATH=~/scripts/py
+export PYTHONPATH=~/scripts/py:$HOME/.local/lib64/python3.7/site-packages
 
 # https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
 AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/latest/meta-data/placement/region)

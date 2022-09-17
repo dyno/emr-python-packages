@@ -17,7 +17,7 @@ glances = "*"
 numpy = "*"
 pandas = "*"
 pyarrow = "*"
-pyhive = "*"
+pyhive = {version="*", extras=["hive"]}
 pyjwt = "*"
 python = "~3.7"
 python-dateutil = "*"
