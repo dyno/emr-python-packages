@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "emr-more-packages"
-version = "2021.04.11"
+version = "2022.09.16"
 description = "Install more packages to EMR"
 authors = ["Dyno Fu <dyno.fu@gmail.com>"]
 
@@ -17,7 +17,7 @@ glances = "*"
 numpy = "*"
 pandas = "*"
 pyarrow = "*"
-pyhive = "extras=['hive', 'trino']"
+pyhive = "*"
 pyjwt = "*"
 python = "~3.7"
 python-dateutil = "*"
@@ -27,10 +27,12 @@ s3fs = "*"
 sasl = "*"
 simple-salesforce = "*"
 sh = "*"
+sqlformat = "*"
 tabulate = "*"
 thrift = ">=0.13.0"
 thrift_sasl = "*"
 tqdm = "*"
+trino = ">=0.315.0"
 yq = "*"
 
 [tool.poetry.dev-dependencies]
