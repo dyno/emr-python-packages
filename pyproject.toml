@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "emr-more-packages"
-version = "2022.09.16"
+version = "2022.12.15"
 description = "Install more packages to EMR"
 authors = ["Dyno Fu <dyno.fu@gmail.com>"]
 
@@ -13,9 +13,9 @@ attrs = "*"
 boto3 = "*"
 cattrs = "*"
 findspark = "*"
-glances = "*"
 numpy = "*"
 pandas = "*"
+psycopg2-binary = "*"
 pyarrow = "*"
 pyhive = {version="*", extras=["hive"]}
 pyjwt = "*"
