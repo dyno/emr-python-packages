@@ -50,9 +50,9 @@ install-vim-plug:
 
 install-git-remote-s3:
 	# https://github.com/bgahagan/git-remote-s3/
-	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v0.1.2/git-remote-s3-x86_64-unknown-linux-gnu.gz
-	gunzip git-remote-s3-x86_64-unknown-linux-gnu.gz
-	mv git-remote-s3-x86_64-unknown-linux-gnu ~/.local/bin/git-remote-s3
+	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v0.1.4/git-remote-s3_v0.1.4_x86_64-unknown-linux-musl.tar.gz
+	tar zxvf git-remote-s3_v0.1.4_x86_64-unknown-linux-musl.tar.gz
+	mv git-remote-s3 ~/.local/bin/git-remote-s3
 	chmod +x ~/.local/bin/git-remote-s3
 
 RG_VERSION := 13.0.0
