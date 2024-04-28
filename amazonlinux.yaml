@@ -7,7 +7,7 @@ spec:
   - name: amazonlinux
     image: amazonlinux:2
     command: ["/bin/bash"]
-    args: ["-c", "yum install -y tar make; while true; do echo hello; sleep 10; done"]
+    args: ["-c", "echo us-east-2 > /etc/yum/vars/awsregion; yum update; yum install -y tar make; while true; do echo hello; sleep 10; done"]
     volumeMounts:
     - mountPath: /Users
       name: home-volume

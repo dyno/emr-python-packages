@@ -1,8 +1,12 @@
 [tool.poetry]
 name = "emr-more-packages"
-version = "2023.01.19"
+version = "2024.04.27"
 description = "Install more packages to EMR"
 authors = ["Dyno Fu <dyno.fu@gmail.com>"]
+
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
 
 [tool.poetry.dependencies]
 absl-py = "*"
@@ -10,15 +14,16 @@ aiohttp = "*"
 aioitertools = "*"
 aiomultiprocess = "*"
 attrs = "*"
-boto3 = "*"
+boto3 = "==1.33.13"
 cattrs = "*"
+fastavro = "*"
 findspark = "*"
 httpie = "*"
 numpy = "*"
-pandas = "*"
+pandas = "==1.1.5"
 psycopg2-binary = "*"
 pyarrow = "*"
-pyhive = {version="*", extras=["hive"]}
+pyhive = {version="*", extras=["hive_pure_sasl"]}
 pyjwt = "*"
 python = "~3.7"
 python-dateutil = "*"
@@ -45,7 +50,7 @@ sqlparse = "*"
 
 [tool.black]
 line-length = 120
-target-version = ['py37', 'py38', 'py39']
+target-version = ['py37', 'py38', 'py39', 'py310']
 include = '\.pyi?$'
 exclude = '''
 /(

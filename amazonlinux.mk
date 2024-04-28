@@ -4,21 +4,28 @@ SHELL = /bin/bash
 install-packages:
 	# tar and make needs to be installed before anything else.
 	yum install --assumeyes \
+		bzip2-devel           \
 		cyrus-sasl-devel      \
 		gcc                   \
 		gcc-c++               \
 		git-core              \
 		go                    \
 		gzip                  \
+		libffi-devel          \
 		make                  \
+		openssl11-devel       \
 		python3               \
 		python3-devel         \
+		readline-devel        \
 		shadow-utils          \
+		sqlite-devel          \
 		sudo                  \
 		tar                   \
 		util-linux            \
 		vim                   \
 		which                 \
+		xz-devel              \
+		zlib-devel            \
 		zstd                  \
 	# END
 
