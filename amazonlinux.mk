@@ -15,6 +15,7 @@ install-packages:
 		make                  \
 		openssl11-devel       \
 		python3               \
+		python3-boto3         \
 		python3-devel         \
 		readline-devel        \
 		shadow-utils          \
