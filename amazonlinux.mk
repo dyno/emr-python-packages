@@ -56,6 +56,7 @@ install-vim-plug:
 	vim -c ":PlugInstall" -c "qa"
 	cp -r /tmp/.bash_completion.d ~/.bash_completion.d
 
+GIT_REMOTE_S3_VERSION := 0.1.4
 install-git-remote-s3:
 	# https://github.com/bgahagan/git-remote-s3/
 	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v0.1.4/git-remote-s3_v0.1.4_x86_64-unknown-linux-musl.tar.gz
@@ -63,7 +64,7 @@ install-git-remote-s3:
 	mv git-remote-s3 ~/.local/bin/git-remote-s3
 	chmod +x ~/.local/bin/git-remote-s3
 
-RG_VERSION := 13.0.0
+RG_VERSION := 14.1.0
 install-rg:
 	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/$(RG_VERSION)/ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl.tar.gz
 	tar xvf ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl.tar.gz ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/rg
@@ -72,9 +73,9 @@ install-rg:
 	chmod +x ~/.local/bin/rg
 	cp ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/complete/rg.bash ~/.bash_completion.d/
 
-FZF_VERSION := 0.33.0
+FZF_VERSION := 0.54.3
 install-fzf:
-	curl -LO https://github.com/junegunn/fzf/releases/download/$(FZF_VERSION)/fzf-$(FZF_VERSION)-linux_amd64.tar.gz
+	curl -LO https://github.com/junegunn/fzf/releases/download/v$(FZF_VERSION)/fzf-$(FZF_VERSION)-linux_amd64.tar.gz
 	curl -L -o ~/.bash_completion.d/fzf.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash
 	curl -L -o ~/.bash_completion.d/fzf-key-bindings.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash
 	tar xvf fzf-$(FZF_VERSION)-linux_amd64.tar.gz
