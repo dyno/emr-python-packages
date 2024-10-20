@@ -54,7 +54,6 @@ install-vim-plug:
 	# END
 	cp /tmp/vimrc ~/.vimrc
 	vim -c ":PlugInstall" -c "qa"
-	cp -r /tmp/.bash_completion.d ~/.bash_completion.d
 
 GIT_REMOTE_S3_VERSION := 0.1.4
 install-git-remote-s3:
@@ -71,11 +70,13 @@ install-rg:
 	tar xvf ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl.tar.gz ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/complete/rg.bash
 	cp ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/rg ~/.local/bin/
 	chmod +x ~/.local/bin/rg
+	mkdir -p ~/.bash_completion.d
 	cp ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/complete/rg.bash ~/.bash_completion.d/
 
 FZF_VERSION := 0.54.3
 install-fzf:
 	curl -LO https://github.com/junegunn/fzf/releases/download/v$(FZF_VERSION)/fzf-$(FZF_VERSION)-linux_amd64.tar.gz
+	mkdir -p ~/.bash_completion.d
 	curl -L -o ~/.bash_completion.d/fzf.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash
 	curl -L -o ~/.bash_completion.d/fzf-key-bindings.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash
 	tar xvf fzf-$(FZF_VERSION)-linux_amd64.tar.gz
@@ -84,4 +85,6 @@ install-fzf:
 
 tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3 install-rg install-fzf
 	cp /tmp/bashrc ~/.bashrc
+	# for invoke.bash and make.bash
+	tar -C /tmp/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
 	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
