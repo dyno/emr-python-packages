@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 
 IMAGE := pyemr-amazonlinux:2023
-CONTAINER := pyemr-amazonlinux
+CONTAINER := pyemr-amazonlinux-2023
 
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 

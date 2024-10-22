@@ -2,6 +2,7 @@ SHELL = /bin/bash
 
 # where the repo is mounted
 REPO := /mnt
+PY := py311
 
 
 install-python-packages:
@@ -19,12 +20,12 @@ install-vim-plug:
 GIT_REMOTE_S3_VERSION := 0.1.4
 install-git-remote-s3:
 	# https://github.com/bgahagan/git-remote-s3/
-	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v0.1.4/git-remote-s3_v0.1.4_x86_64-unknown-linux-musl.tar.gz
-	tar zxvf git-remote-s3_v0.1.4_x86_64-unknown-linux-musl.tar.gz
+	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v$(GIT_REMOTE_S3_VERSION)/git-remote-s3_v$(GIT_REMOTE_S3_VERSION)_x86_64-unknown-linux-musl.tar.gz
+	tar zxvf git-remote-s3_v$(GIT_REMOTE_S3_VERSION)_x86_64-unknown-linux-musl.tar.gz
 	mv git-remote-s3 ~/.local/bin/git-remote-s3
 	chmod +x ~/.local/bin/git-remote-s3
 
-RG_VERSION := 14.1.0
+RG_VERSION := 14.1.1
 install-rg:
 	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/$(RG_VERSION)/ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl.tar.gz
 	tar xvf ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl.tar.gz ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/rg
@@ -34,7 +35,7 @@ install-rg:
 	mkdir -p ~/.bash_completion.d
 	cp ripgrep-$(RG_VERSION)-x86_64-unknown-linux-musl/complete/rg.bash ~/.bash_completion.d/
 
-FZF_VERSION := 0.54.3
+FZF_VERSION := 0.55.0
 install-fzf:
 	curl -LO https://github.com/junegunn/fzf/releases/download/v$(FZF_VERSION)/fzf-$(FZF_VERSION)-linux_amd64.tar.gz
 	mkdir -p ~/.bash_completion.d
@@ -48,4 +49,4 @@ tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3
 	cp $(REPO)/bashrc ~/.bashrc
 	# for invoke.bash and make.bash
 	tar -C $(REPO)/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
-	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
+	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages-$(PY).tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
