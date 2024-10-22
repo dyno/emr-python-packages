@@ -1,58 +1,19 @@
 SHELL = /bin/bash
 
-# as root
-install-packages:
-	# tar and make needs to be installed before anything else.
-	yum install --assumeyes \
-		bzip2-devel           \
-		cyrus-sasl-devel      \
-		gcc                   \
-		gcc-c++               \
-		git-core              \
-		go                    \
-		gzip                  \
-		libffi-devel          \
-		make                  \
-		openssl11-devel       \
-		python3               \
-		python3-boto3         \
-		python3-devel         \
-		readline-devel        \
-		shadow-utils          \
-		sqlite-devel          \
-		sudo                  \
-		tar                   \
-		util-linux            \
-		vim                   \
-		which                 \
-		xz-devel              \
-		zlib-devel            \
-		zstd                  \
-	# END
+# where the repo is mounted
+REPO := /mnt
 
-install-virtualenv: install-packages
-	pip3 install --upgrade pip
-	/usr/local/bin/pip3 install --user poetry
-	[[ ! -f /tmp/requirements.txt ]] && ~/.local/bin/poetry install --no-root || ~/.local/bin/poetry update
-	~/.local/bin/poetry export --dev -f requirements.txt --output requirements.txt
-
-create-hadoop-user:
-	# same as on EMR
-	id hadoop || { groupadd --gid 1001 hadoop && useradd --uid 1001 --gid 1001 --home-dir /home/hadoop hadoop; }
-	echo 'hadoop ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/hadoop
-
-
-# ------------------------------------------------------------------------------
-# as hadoop
 
 install-python-packages:
-	/usr/local/bin/pip3 install --user -r /tmp/requirements.txt
+	cp $(REPO)/pyproject.toml ./
+	uv sync
+	mv ~/.venv ~/.local
 
 install-vim-plug:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs                      \
 	  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
 	# END
-	cp /tmp/vimrc ~/.vimrc
+	cp $(REPO)/vimrc ~/.vimrc
 	vim -c ":PlugInstall" -c "qa"
 
 GIT_REMOTE_S3_VERSION := 0.1.4
@@ -84,7 +45,7 @@ install-fzf:
 	chmod +x ~/.local/bin/fzf
 
 tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3 install-rg install-fzf
-	cp /tmp/bashrc ~/.bashrc
+	cp $(REPO)/bashrc ~/.bashrc
 	# for invoke.bash and make.bash
-	tar -C /tmp/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
-	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf /tmp/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
+	tar -C $(REPO)/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
+	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages.tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d

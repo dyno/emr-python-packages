@@ -1,12 +1,11 @@
-## Create A Python Enviroment with All Packages Installed on EMR
+## Create A Python Enviroment with All Packages Installed for EMR
 
 ### Prerequisite
 
 [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop)
 
-### Add a package
+### Create dev-packages.tar.gz
 
-- `make deploy` to start the docker image
-- edit `pyproject.yaml` and add the package
-- `make exec-make` to create the `dev-packages.tar.gz`
+- add a package edit `pyproject.toml` OR `uv add <package>`
+- build the package `make build-package`
 - On EMR as user hadoop, `tar zxvf dev-packages.tar.gz`
