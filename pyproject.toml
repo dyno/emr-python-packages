@@ -1,8 +1,8 @@
 [project]
 name = "emr-more-packages"
-version = "2024.10.19"
+version = "2024.10.22"
 description = "Install more packages to EMR"
-authors = ["Dyno Fu <dyno.fu@gmail.com>"]
+authors = [{name="Dyno Fu" , email="dyno.fu@gmail.com"}]
 requires-python = ">=3.11"
 dependencies = [
     "absl-py>=2.1.0",
