@@ -1,14 +1,14 @@
 SHELL = /bin/bash
 
 export DOCKER_DEFAULT_PLATFORM := linux/amd64
-ARCH := $(shell sed -e 's@linux/@@' <<< "$(DOCKER_DEFAULT_PLATFORM)" )
-
+ARCH := $(shell sed -e 's@linux/@@' <<< "$(DOCKER_DEFAULT_PLATFORM)")
 
 IMAGE := pyemr-amazonlinux:2023-$(ARCH)
 CONTAINER := pyemr-amazonlinux-2023-$(ARCH)
 
 
 .DEFAULT_GOAL := build-package
+
 # ------------------------------------------------------------------------------
 
 DOCKER_BUILD := docker buildx
@@ -20,12 +20,7 @@ docker-build:
 
 CMD := /bin/bash
 docker-run:
-		docker run -it --rm   \
-			--name $(CONTAINER) \
-			-v $(PWD):/mnt      \
-			$(IMAGE)            \
-			$(CMD)              \
-		# END
+	docker run -it --rm --name $(CONTAINER) -v $(PWD):/mnt $(IMAGE) $(CMD)
 
 
 build-package:
