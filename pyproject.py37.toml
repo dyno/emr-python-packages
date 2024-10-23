@@ -9,7 +9,7 @@ dependencies = [
     "aiohttp>=3.8.6",
     "aiomultiprocess>=0.9.0",
     "attrs>=24.2.0",
-    "boto3>=1.7.84",
+    "boto3>=1.7.84,<=1.25",
     "cattrs>=23.1.2",
     "fastavro>=1.8.0",
     "findspark>=2.0.1",
@@ -33,6 +33,7 @@ dependencies = [
     "tabulate>=0.9.0",
     "tqdm>=4.66.5",
     "trino>=0.327.0",
+    "urllib3<=1.27",
     "yq>=3.4.2",
 ]
 
