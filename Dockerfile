@@ -1,7 +1,10 @@
 # syntax=docker/dockerfile:1
 
-FROM amazonlinux:2023
+ARG al_tag
+FROM amazonlinux:${al_tag:?}
 
+ARG al_py
+ENV AL_PY=${al_py:-python3.11}
 RUN yum update && yum install -y \
       git-core \
       go \
@@ -9,8 +12,8 @@ RUN yum update && yum install -y \
       make \
       openssl \
       openssl-devel \
-      python3.11 \
-      python3.11-devel \
+      ${AL_PY} \
+      ${AL_PY}-devel \
       readline-devel \
       shadow-utils \
       sqlite-devel \

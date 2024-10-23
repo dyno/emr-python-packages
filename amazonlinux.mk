@@ -8,7 +8,7 @@ ARCH := $(shell arch)
 .DEFAULT_GOAL = tar-dev-packages
 
 install-python-packages:
-	cp $(REPO)/pyproject.toml ./
+	cp $(REPO)/pyproject.$(PY).toml ./pyproject.toml
 	uv sync
 	[[ -e ~/.local ]] || mv ~/.venv ~/.local
 
@@ -72,4 +72,4 @@ tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3
 	cp $(REPO)/bashrc ~/.bashrc
 	# for invoke.bash and make.bash
 	tar -C $(REPO)/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
-	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages-$(PY)_$(ARCH).tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
+	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages-$(PY)-$(ARCH).tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d

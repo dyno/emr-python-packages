@@ -11,17 +11,24 @@
 - build the package on local machine
 
 ```bash
-make build-image   DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package DOCKER_DEFAULT_PLATFORM=linux/amd64
-# OR
-make build-image   DOCKER_DEFAULT_PLATFORM=linux/arm64
-make build-package DOCKER_DEFAULT_PLATFORM=linux/arm64
+# PY in [py3.7, py3.11]
+# DOCKER_DEFAULT_PLATFORM in [linux/amd64, linux/arm64]
+
+# EMR 6.x
+make build-image   PY=py37 DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-package PY=py37 DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+# EMR 7.x
+make build-image   PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-package PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
 - On EMR as user `hadoop`
 
 ```bash
-tar zxvf dev-packages-py311-amd64.tar.gz
-# OR
-tar zxvf dev-packages-py311-arm64.tar.gz
+# EMR 6.x
+tar zxvf dev-packages-py37-x86_64.tar.gz
+
+# EMR 7.x
+tar zxvf dev-packages-py311-x86_64.tar.gz
 ```
