@@ -9,8 +9,7 @@ ARCH := $(shell arch)
 
 install-python-packages:
 	cp $(REPO)/pyproject.$(PY).toml ./pyproject.toml
-	uv sync
-	[[ -e ~/.local ]] || mv ~/.venv ~/.local
+	UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=~/.local uv sync
 
 install-vim-plug:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs                      \
