@@ -45,21 +45,3 @@ dev-dependencies = [
 
 [tool.ruff]
 line-length = 128
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.cache
-  | \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.pytest_cache
-  | \.ropeproject
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''

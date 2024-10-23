@@ -23,9 +23,9 @@ let g:neoformat_sql_sqlformat = {
 let g:neoformat_enabled_sql = ['sqlformat']
 
 let g:neoformat_python_black = {
-		\ 'exe': 'black',
+		\ 'exe': 'ruff',
 		\ 'stdin': 1,
-		\ 'args': ['--line-length', '128', '--quiet', '-'],
+		\ 'args': ['format', '--line-length', '128', '--quiet', '-'],
 		\ }
 let g:neoformat_python_isort = {
 		\ 'exe': 'isort',
