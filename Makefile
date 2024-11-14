@@ -7,8 +7,11 @@ PY := py311
 ifeq ($(PY),py311)
 AL_TAG := 2023
 AL_PY := python3.11
+else ifeq ($(PY),py39)
+AL_TAG := 2023
+AL_PY := python3.9
 else
-AL_TAG :=2
+AL_TAG := 2
 AL_PY := python3.7
 endif
 IMAGE := pyemr-amazonlinux:$(AL_TAG)-$(ARCH)
@@ -22,11 +25,11 @@ DOCKER_BUILD := docker buildx
 BUILD_OPTS :=
 build-image: docker-build
 docker-build:
-	$(DOCKER_BUILD) build $(BUILD_OPTS) \
+	$(DOCKER_BUILD) build $(BUILD_OPTS)     \
 		--platform=$(DOCKER_DEFAULT_PLATFORM) \
-		-t $(IMAGE) \
-		--build-arg al_tag=$(AL_TAG) \
-		--build-arg al_py=$(AL_PY) \
+		-t $(IMAGE)                           \
+		--build-arg al_tag=$(AL_TAG)          \
+		--build-arg al_py=$(AL_PY)            \
 		.
 
 
