@@ -7,6 +7,10 @@ PY := py311
 ifeq ($(PY),py311)
 AL_TAG := 2023
 AL_PY := python3.11
+else ifeq ($(PY),py310)
+AL_TAG := 2023
+# will install python 3.10 with uv later
+AL_PY := python3.11
 else ifeq ($(PY),py39)
 AL_TAG := 2023
 AL_PY := python3.9

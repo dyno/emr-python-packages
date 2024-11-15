@@ -7,9 +7,31 @@ ARCH := $(shell arch)
 
 .DEFAULT_GOAL = tar-dev-packages
 
+HOME_LOCAL := ~/.local
+ifeq ($(PY),py311)
+UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
+UV_INSTALL_PYTHON :=
+UV_UNINSTALL_PYTHON :=
+else ifeq ($(PY),py310)
+UV := UV_NATIVE_TLS=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
+UV_INSTALL_PYTHON := $(UV) python install 3.10.15
+UV_UNINSTALL_PYTHON := $(UV) python uninstall 3.10.15
+else ifeq ($(PY),py39)
+UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
+UV_INSTALL_PYTHON :=
+UV_UNINSTALL_PYTHON :=
+else ifeq ($(PY),py37)
+UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
+UV_INSTALL_PYTHON :=
+UV_UNINSTALL_PYTHON :=
+endif
+
 install-python-packages:
+	$(UV_INSTALL_PYTHON)
+	$(UV) venv --allow-existing $(HOME_LOCAL)
 	cp $(REPO)/pyproject.$(PY).toml ./pyproject.toml
-	UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=~/.local uv sync
+	$(UV) sync
+	$(UV_UNINSTALL_PYTHON)
 
 install-vim-plug:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs                      \
