@@ -22,11 +22,12 @@ make build-package PY=py37 DOCKER_DEFAULT_PLATFORM=linux/amd64
 make build-image   PY=py39 DOCKER_DEFAULT_PLATFORM=linux/amd64
 make build-package PY=py39 DOCKER_DEFAULT_PLATFORM=linux/amd64
 
-make build-image   PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
-
 make build-image   PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
 make build-package PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+# RHEL9
+make build-image   PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-package PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
 - On EMR as user `hadoop`
