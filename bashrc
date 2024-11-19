@@ -45,5 +45,7 @@ export PATH=$PATH:~/.local/bin
 export PYTHONPATH=~/scripts/py:$HOME/.local/lib/python3.11/site-packages
 
 # https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
-AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/latest/meta-data/placement/region)
+# https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service/
+_TOKEN=$(curl --silent -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/latest/meta-data/placement/region "$_TOKEN")
 export AWS_DEFAULT_REGION
