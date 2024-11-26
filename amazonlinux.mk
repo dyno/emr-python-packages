@@ -38,21 +38,19 @@ install-vim-plug:
 	  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
 	# END
 	cp $(REPO)/vimrc ~/.vimrc
-	vim -c ":PlugInstall" -c "qa"
+	vim -c ":PlugInstall" -c "qa!"
 
-GIT_REMOTE_S3_VERSION := 0.1.4
+GIT_REMOTE_S3_VERSION := 0.2.1
 install-git-remote-s3:
-	# https://github.com/bgahagan/git-remote-s3/
+	# https://github.com/dyno/git-remote-s3/
 ifeq ($(ARCH),x86_64)
-	curl -LO https://github.com/bgahagan/git-remote-s3/releases/download/v$(GIT_REMOTE_S3_VERSION)/git-remote-s3_v$(GIT_REMOTE_S3_VERSION)_x86_64-unknown-linux-musl.tar.gz
-	tar zxvf git-remote-s3_v$(GIT_REMOTE_S3_VERSION)_x86_64-unknown-linux-musl.tar.gz
+	curl -LO https://github.com/dyno/git-remote-s3/releases/download/v$(GIT_REMOTE_S3_VERSION)/git-remote-s3-x86_64-unknown-linux-musl.tar.gz
+	tar zxvf git-remote-s3-x86_64-unknown-linux-musl.tar.gz
 	mv git-remote-s3 ~/.local/bin/git-remote-s3
 else ifeq ($(ARCH),aarch64)
-	curl -LO https://github.com/bgahagan/git-remote-s3/archive/refs/tags/v$(GIT_REMOTE_S3_VERSION).tar.gz
-	tar zxvf v$(GIT_REMOTE_S3_VERSION).tar.gz
-	sudo yum -y install rust cargo
-	cd git-remote-s3-$(GIT_REMOTE_S3_VERSION) && cargo install git-remote-s3
-	cp ~/.cargo/bin/git-remote-s3 ~/.local/bin/
+	curl -LO https://github.com/dyno/git-remote-s3/releases/download/v$(GIT_REMOTE_S3_VERSION)/git-remote-s3-aarch64-unknown-linux-musl.tar.gz
+	tar zxvf git-remote-s3-aarch64-unknown-linux-musl.tar.gz
+	cp git-remote-s3 ~/.local/bin/git-remote-s3
 endif
 	chmod +x ~/.local/bin/git-remote-s3
 
