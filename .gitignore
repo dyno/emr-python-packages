@@ -2,3 +2,4 @@
 *.tgz
 zold
 *.env
+uv.lock

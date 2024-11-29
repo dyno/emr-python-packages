@@ -37,7 +37,7 @@ make build-package PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
 tar zxvf dev-packages-py37-x86_64.tar.gz
 
 # EMR 7.x
-tar zxvf dev-packages-py311-x86_64.tar.gz
+tar zxvf dev-packages-py39-x86_64.tar.gz
 ```
 
 ### experiment with uv
