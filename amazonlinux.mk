@@ -40,7 +40,7 @@ install-vim-plug:
 	cp $(REPO)/vimrc ~/.vimrc
 	vim -c ":PlugInstall" -c "qa!"
 
-GIT_REMOTE_S3_VERSION := 0.2.1
+GIT_REMOTE_S3_VERSION := 0.2.2
 install-git-remote-s3:
 	# https://github.com/dyno/git-remote-s3/
 ifeq ($(ARCH),x86_64)
