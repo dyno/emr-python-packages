@@ -11,7 +11,7 @@
 - build the package on local machine
 
 ```bash
-# PY in [py37, py39, py311]
+# PY in [py37, py39, py310, py311, py312]
 # DOCKER_DEFAULT_PLATFORM in [linux/amd64, linux/arm64]
 
 # EMR 6.x
@@ -28,6 +28,9 @@ make build-package PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
 # RHEL9
 make build-image   PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
 make build-package PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+make build-image   PY=py312 DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-package PY=py312 DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
 - On EMR as user `hadoop`

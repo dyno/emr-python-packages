@@ -8,7 +8,11 @@ ARCH := $(shell arch)
 .DEFAULT_GOAL = tar-dev-packages
 
 HOME_LOCAL := ~/.local
-ifeq ($(PY),py311)
+ifeq ($(PY),py312)
+UV := UV_NATIVE_TLS=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
+UV_INSTALL_PYTHON := $(UV) python install 3.12.13
+UV_UNINSTALL_PYTHON := $(UV) python uninstall 3.12.13
+else ifeq ($(PY),py311)
 UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
 UV_INSTALL_PYTHON :=
 UV_UNINSTALL_PYTHON :=
