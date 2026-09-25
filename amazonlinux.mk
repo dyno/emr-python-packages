@@ -76,7 +76,7 @@ else ifeq ($(ARCH),aarch64)
 endif
 	chmod +x ~/.local/bin/rg
 
-FZF_VERSION := 0.55.0
+FZF_VERSION := 0.74.4
 install-fzf:
 ifeq ($(ARCH),x86_64)
 	curl -LO https://github.com/junegunn/fzf/releases/download/v$(FZF_VERSION)/fzf-$(FZF_VERSION)-linux_amd64.tar.gz
@@ -86,8 +86,8 @@ else ifeq ($(ARCH),aarch64)
 	tar xvf fzf-$(FZF_VERSION)-linux_arm64.tar.gz
 endif
 	mkdir -p ~/.bash_completion.d
-	curl -L -o ~/.bash_completion.d/fzf.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash
-	curl -L -o ~/.bash_completion.d/fzf-key-bindings.bash https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash
+	curl -L -o ~/.bash_completion.d/fzf.bash https://raw.githubusercontent.com/junegunn/fzf/v$(FZF_VERSION)/shell/completion.bash
+	curl -L -o ~/.bash_completion.d/fzf-key-bindings.bash https://raw.githubusercontent.com/junegunn/fzf/v$(FZF_VERSION)/shell/key-bindings.bash
 	mv fzf ~/.local/bin/fzf
 	chmod +x ~/.local/bin/fzf
 
