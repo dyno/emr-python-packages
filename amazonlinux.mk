@@ -91,7 +91,55 @@ endif
 	mv fzf ~/.local/bin/fzf
 	chmod +x ~/.local/bin/fzf
 
-tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3 install-rg install-fzf
+JQ_VERSION := 1.8.2
+install-jq:
+ifeq ($(ARCH),x86_64)
+	curl -L -o ~/.local/bin/jq https://github.com/jqlang/jq/releases/download/jq-$(JQ_VERSION)/jq-linux-amd64
+else ifeq ($(ARCH),aarch64)
+	curl -L -o ~/.local/bin/jq https://github.com/jqlang/jq/releases/download/jq-$(JQ_VERSION)/jq-linux-arm64
+endif
+	chmod +x ~/.local/bin/jq
+
+K9S_VERSION := 0.51.0
+install-k9s:
+ifeq ($(ARCH),x86_64)
+	curl -LO https://github.com/derailed/k9s/releases/download/v$(K9S_VERSION)/k9s_Linux_amd64.tar.gz
+	tar xvf k9s_Linux_amd64.tar.gz k9s
+else ifeq ($(ARCH),aarch64)
+	curl -LO https://github.com/derailed/k9s/releases/download/v$(K9S_VERSION)/k9s_Linux_arm64.tar.gz
+	tar xvf k9s_Linux_arm64.tar.gz k9s
+endif
+	mv k9s ~/.local/bin/k9s
+	chmod +x ~/.local/bin/k9s
+
+KUBECTL_VERSION := 1.37.1
+install-kubectl:
+	mkdir -p ~/.bash_completion.d
+ifeq ($(ARCH),x86_64)
+	curl -L -o ~/.local/bin/kubectl https://dl.k8s.io/release/v$(KUBECTL_VERSION)/bin/linux/amd64/kubectl
+else ifeq ($(ARCH),aarch64)
+	curl -L -o ~/.local/bin/kubectl https://dl.k8s.io/release/v$(KUBECTL_VERSION)/bin/linux/arm64/kubectl
+endif
+	chmod +x ~/.local/bin/kubectl
+	~/.local/bin/kubectl completion bash > ~/.bash_completion.d/kubectl.bash
+
+# GNU make: built --without-guile so it links only libc (glibc 2.34, matching
+# the AL2023 target), avoiding the libguile/libgc/... chain the OS make pulls in.
+MAKE_VERSION := 4.4.1
+install-make:
+	curl -LO https://mirrors.kernel.org/gnu/make/make-$(MAKE_VERSION).tar.gz
+	tar xzf make-$(MAKE_VERSION).tar.gz
+	cd make-$(MAKE_VERSION) && ./configure --without-guile && make
+	cp make-$(MAKE_VERSION)/make ~/.local/bin/make
+	chmod +x ~/.local/bin/make
+
+# GNU diffutils diff from the AL2023 build image links only libc (glibc 2.34),
+# so it runs as-is on the AL2023 notebook target.
+install-diff:
+	cp /usr/bin/diff ~/.local/bin/diff
+	chmod +x ~/.local/bin/diff
+
+tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3 install-rg install-fzf install-jq install-k9s install-kubectl install-make install-diff
 	cp $(REPO)/bashrc ~/.bashrc
 	# for invoke.bash and make.bash
 	tar -C $(REPO)/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
