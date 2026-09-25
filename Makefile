@@ -42,8 +42,11 @@ docker-build:
 
 
 CMD := /bin/bash
+# use a TTY only when stdin is one (so background/CI builds don't fail),
+# and anchor the mount to make's actual cwd rather than a possibly-stale $PWD
+DOCKER_TTY := $(shell [ -t 0 ] && echo -it || echo -i)
 docker-run:
-	docker run -it --rm --name $(CONTAINER) -v $(PWD):/mnt $(IMAGE) $(CMD)
+	docker run $(DOCKER_TTY) --rm --name $(CONTAINER) -v $(CURDIR):/mnt $(IMAGE) $(CMD)
 
 
 build-package:
