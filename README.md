@@ -11,44 +11,27 @@
 - build the package on local machine
 
 ```bash
-# PY in [py37, py39, py310, py311, py312]
 # DOCKER_DEFAULT_PLATFORM in [linux/amd64, linux/arm64]
-
-# EMR 6.x
-make build-image   PY=py37 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py37 DOCKER_DEFAULT_PLATFORM=linux/amd64
-
-# EMR 7.x
-make build-image   PY=py39 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py39 DOCKER_DEFAULT_PLATFORM=linux/amd64
-
-make build-image   PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py311 DOCKER_DEFAULT_PLATFORM=linux/amd64
-
-# RHEL9
-make build-image   PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py310 DOCKER_DEFAULT_PLATFORM=linux/amd64
-
-make build-image   PY=py312 DOCKER_DEFAULT_PLATFORM=linux/amd64
-make build-package PY=py312 DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-image   DOCKER_DEFAULT_PLATFORM=linux/amd64
+make build-package DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
-- On EMR as user `hadoop`
+- On the target host as user `hadoop`
 
 ```bash
-# EMR 6.x
-tar zxvf dev-packages-py37-x86_64.tar.gz
-
-# EMR 7.x
-tar zxvf dev-packages-py39-x86_64.tar.gz
+tar zxvf dev-packages-py312-x86_64.tar.gz
 ```
+
+- duckdb extensions `httpfs` and `aws` are baked into `~/.duckdb/extensions`
+  (duckdb's default extension directory), so `LOAD httpfs;` / `LOAD aws;` work
+  without downloading or uploading them.
 
 ### experiment with uv
 
 ```bash
-make PY=py39 docker-run
+make docker-run
 
 # inside docker
-cp /mnt/pyproject.py39.toml pyproject.toml
+cp /mnt/pyproject.py312.toml pyproject.toml
 uv sync
 ```

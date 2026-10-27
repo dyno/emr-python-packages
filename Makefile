@@ -3,25 +3,10 @@ SHELL = /bin/bash
 export DOCKER_DEFAULT_PLATFORM := linux/amd64
 ARCH := $(shell sed -e 's@linux/@@' <<< "$(DOCKER_DEFAULT_PLATFORM)")
 
-PY := py311
-ifeq ($(PY),py312)
+PY := py312
 AL_TAG := 2023
 # will install python 3.12 with uv later
 AL_PY := python3.11
-else ifeq ($(PY),py311)
-AL_TAG := 2023
-AL_PY := python3.11
-else ifeq ($(PY),py310)
-AL_TAG := 2023
-# will install python 3.10 with uv later
-AL_PY := python3.11
-else ifeq ($(PY),py39)
-AL_TAG := 2023
-AL_PY := python3.9
-else
-AL_TAG := 2
-AL_PY := python3.7
-endif
 IMAGE := pyemr-amazonlinux:$(AL_TAG)-$(ARCH)
 CONTAINER := pyemr-amazonlinux-$(AL_TAG)-$(ARCH)
 

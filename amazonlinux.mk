@@ -2,39 +2,24 @@ SHELL = /bin/bash
 
 # where the repo is mounted
 REPO := /mnt
-PY := py311
+PY := py312
 ARCH := $(shell arch)
 
 .DEFAULT_GOAL = tar-dev-packages
 
 HOME_LOCAL := ~/.local
-ifeq ($(PY),py312)
 UV := UV_NATIVE_TLS=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
 UV_INSTALL_PYTHON := $(UV) python install 3.12.13
 UV_UNINSTALL_PYTHON := $(UV) python uninstall 3.12.13
-else ifeq ($(PY),py311)
-UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
-UV_INSTALL_PYTHON :=
-UV_UNINSTALL_PYTHON :=
-else ifeq ($(PY),py310)
-UV := UV_NATIVE_TLS=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
-UV_INSTALL_PYTHON := $(UV) python install 3.10.15
-UV_UNINSTALL_PYTHON := $(UV) python uninstall 3.10.15
-else ifeq ($(PY),py39)
-UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
-UV_INSTALL_PYTHON :=
-UV_UNINSTALL_PYTHON :=
-else ifeq ($(PY),py37)
-UV := UV_NATIVE_TLS=true UV_SYSTEM_PYTHON=true UV_PROJECT_ENVIRONMENT=$(HOME_LOCAL) uv
-UV_INSTALL_PYTHON :=
-UV_UNINSTALL_PYTHON :=
-endif
 
 install-python-packages:
 	$(UV_INSTALL_PYTHON)
 	$(UV) venv --allow-existing $(HOME_LOCAL)
 	cp $(REPO)/pyproject.$(PY).toml ./pyproject.toml
 	$(UV) sync
+	# bake duckdb extensions into ~/.duckdb/extensions (duckdb's default dir),
+	# using the just-installed duckdb so the extension version matches.
+	$(UV) run --no-sync python -c "import duckdb; c = duckdb.connect(); [c.install_extension(e) for e in ('httpfs', 'aws')]"
 	$(UV_UNINSTALL_PYTHON)
 
 install-vim-plug:
@@ -143,4 +128,4 @@ tar-dev-packages: install-python-packages install-vim-plug install-git-remote-s3
 	cp $(REPO)/bashrc ~/.bashrc
 	# for invoke.bash and make.bash
 	tar -C $(REPO)/.bash_completion.d/ -cf - . | tar -C ~/.bash_completion.d/ -xvf -
-	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages-$(PY)-$(ARCH).tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d
+	tar --exclude='*.py[co]' --exclude='__pycache__' -zcvf $(REPO)/dev-packages-$(PY)-$(ARCH).tar.gz -C /home/hadoop .local .vim .vimrc .bashrc .bash_completion.d .duckdb
